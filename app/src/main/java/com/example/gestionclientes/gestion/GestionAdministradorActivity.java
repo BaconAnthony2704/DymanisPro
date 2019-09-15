@@ -41,6 +41,7 @@ public class GestionAdministradorActivity extends AppCompatActivity {
                         alerta.setMessage("Sesion finalizada");
                         alerta.show();
                         LoginActivity.cambiarEstadoBtn(GestionAdministradorActivity.this,false);
+                        LoginActivity.cambiarEstadoLvl(GestionAdministradorActivity.this,0);
                         Intent intent4=new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intent4);
                         //onBackPressed();

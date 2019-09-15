@@ -3,6 +3,7 @@ package com.example.gestionclientes;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.Preference;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,17 +39,22 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
     boolean isActivateRadioButton;
     public static final String Preference_Estado_Button="estado.button";
     public static final String String_Preferences="SharedButton";
+    public static final String Preference_Estado_Lvl="estado.lvl";
+    public static final String String_Preferences_Lvl="SharedLevel";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        if (obtenerEstadoBtn()== true){
+        if (obtenerEstadoBtn()== true && getLvl()==1){
             Intent i = new Intent(LoginActivity.this,GestionAdministradorActivity.class);
             startActivity(i);
             finish();
+        }else if(obtenerEstadoBtn()== true && getLvl()==3){
+            Intent i = new Intent(LoginActivity.this,GestionPartnerActivity.class);
+            startActivity(i);
+            finish();
         }
-
         txtusuario=(EditText) findViewById(R.id.txtUsuario);
         txtpass=(EditText) findViewById(R.id.txtPass);
         request= Volley.newRequestQueue(this);
@@ -99,11 +105,13 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
         try{
             if(!usr.getUsuario().equals("no registra")&& !usr.getPassword().equals("no registra") && usr.getNivel()==1){
                 guardarEstadoBtn();
+                guardarEstadoLvl(1);
                 Intent intent=new Intent(this, GestionAdministradorActivity.class);
                 startActivity(intent);
                 finish();
             }else if(!usr.getUsuario().equals("no registra")&& !usr.getPassword().equals("no registra") && usr.getNivel()==3){
                 guardarEstadoBtn();
+                guardarEstadoLvl(3);
                 Intent intent=new Intent(this, GestionPartnerActivity.class);
                 startActivity(intent);
                 finish();
@@ -119,8 +127,12 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
 
     }
     public void loginUsuario(View v){
-            usr=null;
-            cargarWebServicePartner();
+        usr=null;
+        cargarWebServicePartner();
+    }
+    public  void regUsaurio(View v){
+        Intent intent=new Intent(this, RegistrarsePartnerActivity.class);
+        startActivity(intent);
     }
     private void cargarWebServicePartner(){
         try{
@@ -154,5 +166,18 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
     public static void cambiarEstadoBtn(Context c , boolean b){
         SharedPreferences preferences= c.getSharedPreferences(String_Preferences,MODE_PRIVATE);
         preferences.edit().putBoolean(Preference_Estado_Button,b).apply();
+    }
+    public Integer getLvl(){
+        SharedPreferences preferences= getSharedPreferences(String_Preferences_Lvl,MODE_PRIVATE);
+        Integer i = preferences.getInt(Preference_Estado_Lvl,0);
+        return i;
+    }
+    public static void cambiarEstadoLvl(Context c , Integer num){
+        SharedPreferences preferences= c.getSharedPreferences(String_Preferences_Lvl,MODE_PRIVATE);
+        preferences.edit().putInt(Preference_Estado_Lvl,num).apply();
+    }
+    public void guardarEstadoLvl(Integer lvl) {
+        SharedPreferences preferences = getSharedPreferences(String_Preferences_Lvl, MODE_PRIVATE);
+        preferences.edit().putInt(Preference_Estado_Lvl, lvl).apply();
     }
 }
