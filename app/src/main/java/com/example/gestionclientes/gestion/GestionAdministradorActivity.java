@@ -40,10 +40,11 @@ public class GestionAdministradorActivity extends AppCompatActivity {
                     case 4:
                         alerta.setMessage("Sesion finalizada");
                         alerta.show();
-                        //LoginActivity.cambiarEstadoBtn;
+                        LoginActivity.cambiarEstadoBtn(GestionAdministradorActivity.this,false);
                         Intent intent4=new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intent4);
-                        onBackPressed();
+                        //onBackPressed();
+                        finish();
                         break;
                 }
             }

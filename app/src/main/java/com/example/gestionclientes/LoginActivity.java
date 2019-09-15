@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
     Usuario usr=null;
     RadioButton RSesion;
     boolean isActivateRadioButton;
-    public static  String Preference_Estado_Button="estado.button";
+    public static final String Preference_Estado_Button="estado.button";
     public static final String String_Preferences="SharedButton";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
