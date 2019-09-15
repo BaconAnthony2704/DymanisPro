@@ -33,12 +33,26 @@ public class RegistrarsePartnerActivity extends AppCompatActivity implements Res
     }
 
     public void registrarme(View v){
-        if(txtcontra.getText().toString().equals(txtconficontra.getText().toString())){
-            cargarWebService();
+        if(this.txtnombre.getText().toString().equals("") && this.txtusuario.getText().toString().equals("")
+        && this.txtcontra.getText().toString().equals("") && this.txtconficontra.getText().toString().equals("")){
+            Toast.makeText(getApplicationContext(),"Debe completar los campos",Toast.LENGTH_SHORT).show();
+        }else if(this.txtnombre.getText().toString().equals("") || this.txtusuario.getText().toString().equals("")
+                || this.txtcontra.getText().toString().equals("") || this.txtconficontra.getText().toString().equals("")){
+            Toast.makeText(getApplicationContext(),"Hacen falta parametros.",Toast.LENGTH_SHORT).show();
+        }else if(this.txtusuario.getText().length()<5){
+            Toast.makeText(getApplicationContext(),"usuario debe ser mayor a 5 caracteres",Toast.LENGTH_SHORT).show();
+        }else if(this.txtcontra.getText().length()<5){
+            Toast.makeText(getApplicationContext(),"contraseña debe ser mayor a 5 caracteres",Toast.LENGTH_SHORT).show();
+        }else if(this.txtusuario.getText().length()>=5 && this.txtcontra.getText().length()>=5 &&
+                    this.txtconficontra.getText().length()>=5){
+            if(txtcontra.getText().toString().equals(txtconficontra.getText().toString())){
+                cargarWebService();
+            }
+            else{
+                Toast.makeText(getApplicationContext(),"La contraseña debe coincidir",Toast.LENGTH_LONG).show();
+            }
         }
-        else{
-            Toast.makeText(getApplicationContext(),"La contraseña debe coincidir",Toast.LENGTH_LONG).show();
-        }
+
 
     }
 

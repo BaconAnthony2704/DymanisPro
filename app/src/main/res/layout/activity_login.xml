@@ -72,28 +72,23 @@
                 android:layout_height="wrap_content"
                 android:text="No cerrar sesion" />
 
-            <LinearLayout
+            <Button
+                android:id="@+id/button2"
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#D5FE4701"
+                android:onClick="loginUsuario"
+                android:text="Ingresar" />
 
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_width="205dp"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#D5FE4701"
-                    android:onClick="regUsaurio"
-                    android:text="Registrarse" />
-
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="205dp"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#D5FE4701"
-                    android:onClick="loginUsuario"
-                    android:text="Ingresar" />
-            </LinearLayout>
-
+            <Button
+                android:id="@+id/registrarme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#D5FE4701"
+                android:onClick="registrarme"
+                android:text="Registrarme" />
         </LinearLayout>
     </ScrollView>
 

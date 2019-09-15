@@ -128,7 +128,17 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
     }
     public void loginUsuario(View v){
         usr=null;
-        cargarWebServicePartner();
+        if (this.txtusuario.getText().toString().equals("") && this.txtpass.getText().toString().equals("")) {
+            Toast.makeText(getApplicationContext(),"Debe completar los campos",Toast.LENGTH_SHORT).show();
+        }
+        else if(this.txtusuario.getText().toString().equals("")){
+            Toast.makeText(getApplicationContext(),"Debe ingresar su usuario",Toast.LENGTH_SHORT).show();
+        }else if(this.txtpass.getText().toString().equals("")){
+            Toast.makeText(getApplicationContext(),"Debe ingresar su contraseña",Toast.LENGTH_SHORT).show();
+        } else{
+            cargarWebServicePartner();
+        }
+
     }
     public  void regUsaurio(View v){
         Intent intent=new Intent(this, RegistrarsePartnerActivity.class);
@@ -153,6 +163,11 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
         }catch (Exception e){
             Toast.makeText(getApplicationContext(),"No se pudo enlazar la BD "+e,Toast.LENGTH_LONG).show();
         }
+    }
+    public void registrarme(View v){
+        Intent i=new Intent(this,RegistrarsePartnerActivity.class);
+        startActivity(i);
+
     }
 
     public void guardarEstadoBtn(){
