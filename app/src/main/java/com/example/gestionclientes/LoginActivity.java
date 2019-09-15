@@ -1,6 +1,8 @@
 package com.example.gestionclientes;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -31,16 +34,36 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
     JsonObjectRequest jsonObjectRequest;
     MyProgressDialog progreso;
     Usuario usr=null;
+    RadioButton RSesion;
+    boolean isActivateRadioButton;
+    public static  String Preference_Estado_Button="estado.button";
+    public static final String String_Preferences="SharedButton";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        if (obtenerEstadoBtn()== true){
+            Intent i = new Intent(LoginActivity.this,GestionAdministradorActivity.class);
+            startActivity(i);
+            finish();
+        }
+
         txtusuario=(EditText) findViewById(R.id.txtUsuario);
         txtpass=(EditText) findViewById(R.id.txtPass);
         request= Volley.newRequestQueue(this);
 
-
+        RSesion= (RadioButton) findViewById(R.id.RBSecion);
+        isActivateRadioButton=RSesion.isChecked();
+        RSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isActivateRadioButton){
+                    RSesion.setChecked(false);
+                }
+                isActivateRadioButton=RSesion.isChecked();
+            }
+        });
 
     }
 
@@ -60,6 +83,7 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
         usr=null;
         JSONArray json=response.optJSONArray("login_partner");
         JSONObject jsonObject=null;
+
         try {
             usr=new Usuario();
             jsonObject=json.getJSONObject(0);
@@ -74,10 +98,12 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
         }
         try{
             if(!usr.getUsuario().equals("no registra")&& !usr.getPassword().equals("no registra") && usr.getNivel()==1){
+                guardarEstadoBtn();
                 Intent intent=new Intent(this, GestionAdministradorActivity.class);
                 startActivity(intent);
                 finish();
             }else if(!usr.getUsuario().equals("no registra")&& !usr.getPassword().equals("no registra") && usr.getNivel()==3){
+                guardarEstadoBtn();
                 Intent intent=new Intent(this, GestionPartnerActivity.class);
                 startActivity(intent);
                 finish();
@@ -115,5 +141,18 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
         }catch (Exception e){
             Toast.makeText(getApplicationContext(),"No se pudo enlazar la BD "+e,Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void guardarEstadoBtn(){
+        SharedPreferences preferences= getSharedPreferences(String_Preferences,MODE_PRIVATE);
+        preferences.edit().putBoolean(Preference_Estado_Button,RSesion.isChecked()).apply();
+    }
+    public boolean obtenerEstadoBtn(){
+        SharedPreferences preferences= getSharedPreferences(String_Preferences,MODE_PRIVATE);
+        return preferences.getBoolean(Preference_Estado_Button,false);
+    }
+    public static void cambiarEstadoBtn(Context c , boolean b){
+        SharedPreferences preferences= c.getSharedPreferences(String_Preferences,MODE_PRIVATE);
+        preferences.edit().putBoolean(Preference_Estado_Button,b).apply();
     }
 }

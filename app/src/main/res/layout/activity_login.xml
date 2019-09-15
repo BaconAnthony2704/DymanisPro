@@ -66,6 +66,12 @@
                 android:inputType="textPassword"
                 android:textSize="18sp" />
 
+            <RadioButton
+                android:id="@+id/RBSecion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No cerrar sesion" />
+
             <Button
                 android:id="@+id/button2"
                 android:layout_width="match_parent"

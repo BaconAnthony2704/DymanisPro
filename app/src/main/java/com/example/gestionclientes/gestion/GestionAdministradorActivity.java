@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.gestionclientes.LoginActivity;
@@ -15,6 +16,7 @@ import com.example.gestionclientes.R;
 
 public class GestionAdministradorActivity extends AppCompatActivity {
     private ListView list;
+
 
     private String[] activities={"Gestionar Cliente","Gestionar Cursos", "Gestionar Credenciales","Gestionar Promociones","Cerrar Sesion"};
     @Override
@@ -36,10 +38,9 @@ public class GestionAdministradorActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case 4:
-
                         alerta.setMessage("Sesion finalizada");
                         alerta.show();
-
+                        //LoginActivity.cambiarEstadoBtn;
                         Intent intent4=new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intent4);
                         onBackPressed();
@@ -48,4 +49,5 @@ public class GestionAdministradorActivity extends AppCompatActivity {
             }
         });
     }
+
 }

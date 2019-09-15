@@ -18,15 +18,16 @@
         <activity
             android:name=".WelcomeActivity"
             android:screenOrientation="portrait">
+        </activity>
+
+        <activity android:name=".gestion.GestionAdministradorActivity" />
+        <activity android:name=".gestion.GestionListaClienteActivity" />
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".gestion.GestionAdministradorActivity" />
-        <activity android:name=".gestion.GestionListaClienteActivity" />
-        <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity" />
     </application>
     <uses-permission android:name="android.permission.READ_CONTACTS" />
