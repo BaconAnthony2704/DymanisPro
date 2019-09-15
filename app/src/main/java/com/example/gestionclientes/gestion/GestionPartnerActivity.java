@@ -38,10 +38,11 @@ public class GestionPartnerActivity extends AppCompatActivity {
 
                         alerta.setMessage("Sesion finalizada");
                         alerta.show();
-
+                        LoginActivity.cambiarEstadoBtn(GestionPartnerActivity.this,false);
                         Intent intent4=new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intent4);
-                        onBackPressed();
+                        //onBackPressed();
+                        finish();
                         break;
                 }
             }
