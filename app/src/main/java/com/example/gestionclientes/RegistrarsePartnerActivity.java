@@ -40,7 +40,7 @@ public class RegistrarsePartnerActivity extends AppCompatActivity implements Res
                 || this.txtcontra.getText().toString().equals("") || this.txtconficontra.getText().toString().equals("")){
             Toast.makeText(getApplicationContext(),"Hacen falta parametros.",Toast.LENGTH_SHORT).show();
         }else if(this.txtusuario.getText().length()<5){
-            Toast.makeText(getApplicationContext(),"usuario debe ser mayor a 5 caracteres",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),"usuario debe ser mayor a 5 caracteres.",Toast.LENGTH_SHORT).show();
         }else if(this.txtcontra.getText().length()<5){
             Toast.makeText(getApplicationContext(),"contraseña debe ser mayor a 5 caracteres",Toast.LENGTH_SHORT).show();
         }else if(this.txtusuario.getText().length()>=5 && this.txtcontra.getText().length()>=5 &&
