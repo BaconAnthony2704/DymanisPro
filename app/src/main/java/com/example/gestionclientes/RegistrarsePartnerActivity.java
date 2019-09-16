@@ -49,7 +49,7 @@ public class RegistrarsePartnerActivity extends AppCompatActivity implements Res
                 cargarWebService();
             }
             else{
-                Toast.makeText(getApplicationContext(),"La contraseña debe coincidir",Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"La contraseña debe coincidir.",Toast.LENGTH_LONG).show();
             }
         }
 
