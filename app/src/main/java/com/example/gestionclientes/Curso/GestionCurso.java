@@ -31,7 +31,9 @@ public class GestionCurso extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(),"Ha pulsado el item: "+position,Toast.LENGTH_LONG).show();
                 switch (position) {
                     case 0:
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), AgregarCursos.class);
+                        startActivity(intent);
+                        break;
 
                 }
             }

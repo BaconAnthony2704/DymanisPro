@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.example.gestionclientes.Curso.GestionCurso;
 import com.example.gestionclientes.LoginActivity;
 import com.example.gestionclientes.MainActivity;
 import com.example.gestionclientes.R;
@@ -36,6 +37,10 @@ public class GestionAdministradorActivity extends AppCompatActivity {
                     case 0:
                         Intent intent=new Intent(getApplicationContext(), GestionListaClienteActivity.class);
                         startActivity(intent);
+                        break;
+                    case 1:
+                        Intent intent2=new Intent(getApplicationContext(), GestionCurso.class);
+                        startActivity(intent2);
                         break;
                     case 4:
                         alerta.setMessage("Sesion finalizada");

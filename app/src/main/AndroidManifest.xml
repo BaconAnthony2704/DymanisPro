@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.gestionclientes">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon_peque"
@@ -10,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Curso.GestionCurso"></activity>
+        <activity android:name=".Curso.ModificarCursos"></activity>
+        <activity android:name=".Curso.AgregarCursos" />
+        <activity android:name=".Curso.GestionCurso" />
         <activity
             android:name=".ConsultarCliente"
             android:screenOrientation="portrait" />
@@ -28,7 +35,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".WelcomeActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".gestion.GestionAdministradorActivity"
             android:screenOrientation="portrait" />
@@ -48,10 +55,5 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
 </manifest>
