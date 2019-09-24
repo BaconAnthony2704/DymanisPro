@@ -24,12 +24,15 @@ import com.example.gestionclientes.entidades.Usuario;
 import com.example.gestionclientes.gestion.GestionAdministradorActivity;
 import com.example.gestionclientes.gestion.GestionListaClienteActivity;
 import com.example.gestionclientes.gestion.GestionPartnerActivity;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class LoginActivity extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener {
+import java.io.Serializable;
+
+public class LoginActivity extends AppCompatActivity implements Response.Listener<JSONObject>, Response.ErrorListener, Serializable {
     EditText txtusuario,txtpass;
     RequestQueue request;
     JsonObjectRequest jsonObjectRequest;
@@ -52,6 +55,11 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
             finish();
         }else if(obtenerEstadoBtn()== true && getLvl()==3){
             Intent i = new Intent(LoginActivity.this,GestionPartnerActivity.class);
+            Gson gson=new Gson();
+            SharedPreferences  mPrefs = getPreferences(MODE_PRIVATE);
+            String json=mPrefs.getString("usr","");
+            Usuario usr=gson.fromJson(json,Usuario.class);
+            i.putExtra("id",usr);
             startActivity(i);
             finish();
         }
@@ -86,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
         progreso.dismiss();
         AlertDialog.Builder alerta=new AlertDialog.Builder(this);
         //Toast.makeText(getApplicationContext(),"Mensaje: "+response,Toast.LENGTH_LONG).show();
-        usr=null;
+        //usr=null;
         JSONArray json=response.optJSONArray("login_partner");
         JSONObject jsonObject=null;
 
@@ -97,6 +105,8 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
                 usr.setPassword(jsonObject.optString("password"));
                 usr.setNivel(jsonObject.optInt("nivel"));
                 usr.setVisible(jsonObject.optInt("estado"));
+                usr.setId_partner(jsonObject.optInt("id_partner"));
+
 
 
         } catch (JSONException e) {
@@ -112,7 +122,9 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
             }else if(!usr.getUsuario().equals("no registra")&& !usr.getPassword().equals("no registra") && usr.getNivel()==3){
                 guardarEstadoBtn();
                 guardarEstadoLvl(3);
+                guardarUsuario();
                 Intent intent=new Intent(this, GestionPartnerActivity.class);
+                intent.putExtra("id",usr);
                 startActivity(intent);
                 finish();
             }
@@ -126,8 +138,19 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
         }
 
     }
+
+    private void guardarUsuario() {
+        SharedPreferences mPrefs=getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+        String json = gson.toJson(usr);
+        prefsEditor.putString("usr", json);
+        prefsEditor.commit();
+    }
+
+
     public void loginUsuario(View v){
-        usr=null;
+        //usr=null;
         if (this.txtusuario.getText().toString().equals("") && this.txtpass.getText().toString().equals("")) {
             Toast.makeText(getApplicationContext(),"Debe completar los campos",Toast.LENGTH_SHORT).show();
         }
@@ -140,10 +163,7 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
         }
 
     }
-    public  void regUsaurio(View v){
-        Intent intent=new Intent(this, RegistrarsePartnerActivity.class);
-        startActivity(intent);
-    }
+
     private void cargarWebServicePartner(){
         try{
             progreso=new MyProgressDialog(this);
@@ -152,16 +172,11 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
             String ip=getString(R.string.ip);
             String url=ip+"/ejemploBDRemota/wsJSONLoginPartner.php?"+
                     "usuario="+txtusuario.getText().toString().trim()+"&password="+txtpass.getText().toString().trim();
-            //url=url.replace(" ","%20");
-
             jsonObjectRequest=new JsonObjectRequest(Request.Method.GET,url,null,this,this);
             request.add(jsonObjectRequest);
-           /*Toast.makeText(getApplicationContext(),txtnombre.getText().toString().trim()+"\n" +
-                   txtusuario.getText().toString().trim()+"\n" +
-                   txtcontra.getText().toString().trim()+"\n" +
-                   txtconficontra.getText().toString().trim(),Toast.LENGTH_LONG).show();*/
         }catch (Exception e){
             Toast.makeText(getApplicationContext(),"No se pudo enlazar la BD "+e,Toast.LENGTH_LONG).show();
+            progreso.dismiss();
         }
     }
     public void registrarme(View v){
@@ -195,4 +210,6 @@ public class LoginActivity extends AppCompatActivity implements Response.Listene
         SharedPreferences preferences = getSharedPreferences(String_Preferences_Lvl, MODE_PRIVATE);
         preferences.edit().putInt(Preference_Estado_Lvl, lvl).apply();
     }
+
+
 }

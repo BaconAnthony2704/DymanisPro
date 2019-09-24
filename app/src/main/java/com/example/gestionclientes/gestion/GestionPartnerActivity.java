@@ -10,12 +10,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.gestionclientes.LoginActivity;
+import com.example.gestionclientes.MainActivity;
 import com.example.gestionclientes.R;
+import com.example.gestionclientes.entidades.Usuario;
 
-public class GestionPartnerActivity extends AppCompatActivity {
+import java.io.Serializable;
+
+public class GestionPartnerActivity extends AppCompatActivity implements Serializable {
     private ListView list;
 
-    private String[] activities={"Gestionar Cliente","Cerrar Sesion"};
+    private String[] activities={"Ingresar Cliente","Mostrar Cursos disponibles","Mostrar mis clientes","Cerrar Sesion"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         final AlertDialog.Builder alerta=new AlertDialog.Builder(this);
@@ -31,10 +35,16 @@ public class GestionPartnerActivity extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(),"Ha pulsado el item: "+position,Toast.LENGTH_LONG).show();
                 switch (position){
                     case 0:
-                        Intent intent=new Intent(getApplicationContext(), GestionListaClienteActivity.class);
+                        Intent intent=new Intent(getApplicationContext(), MainActivity.class);
+                        Usuario usr=(Usuario)getIntent().getExtras().getSerializable("id");
+                        intent.putExtra("id",usr);
                         startActivity(intent);
                         break;
                     case 1:
+                        Intent intent1=new Intent(getApplicationContext(),MostrarCursoActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case 3:
 
                         alerta.setMessage("Sesion finalizada");
                         alerta.show();

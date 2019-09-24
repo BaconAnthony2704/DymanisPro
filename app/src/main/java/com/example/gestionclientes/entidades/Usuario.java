@@ -1,7 +1,19 @@
 package com.example.gestionclientes.entidades;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario  implements Serializable {
+    int id_partner;
     private int nivel;
+
+    public int getId_partner() {
+        return id_partner;
+    }
+
+    public void setId_partner(int id_partner) {
+        this.id_partner = id_partner;
+    }
+
     private int visible;
     private String nombre;
     private String usuario;

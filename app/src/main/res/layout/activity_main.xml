@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
 
 
     <TextView
@@ -15,56 +15,151 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:background="@color/colorAccent"
+        android:background="#D5FE4701"
         android:gravity="center"
         android:text="Registro de cliente"
-        android:textSize="18sp" />
+        android:textSize="24sp" />
 
-
-    <TextView
-        android:id="@+id/textView2"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="documento" />
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/txtDocumento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="numberDecimal" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Nombre" />
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombres"
+                android:textSize="18sp" />
 
-    <EditText
-        android:id="@+id/txtnombrepartner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/txtNombres"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="Ingrese los Nombres"
+                android:inputType="textPersonName"
+                android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Profesion" />
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Apellidos"
+                android:textSize="18sp" />
 
-    <EditText
-        android:id="@+id/txtProfesion"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName" />
+            <EditText
+                android:id="@+id/txtApellidos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="Ingrese los Apellidos"
+                android:inputType="textPersonName"
+                android:textSize="18sp" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="registrarCliente"
-        android:text="Registrar" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/ib_obtener_fecha"
+                    android:layout_width="78dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorPrimary"
+                    android:onClick="obtenerFecha"
+                    android:scaleType="fitEnd"
+                    app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
+                <LinearLayout
+                    android:layout_width="291dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView28"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha de nacimiento"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/et_mostrar_fecha_picker"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:text="Click en boton de calendario"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView24"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="DUI"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/txtDUI"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="Ingrese el DUI"
+                android:inputType="text"
+                android:text="05032429-2"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NIT"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/txtNIT"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:ems="10"
+                android:hint="ingrese el NIT"
+                android:inputType="text"
+                android:text="0514-090894-115-0"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Curso"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:background="#D5FE4701"
+                android:onClick="registrarCliente"
+                android:text="Registrar" />
+        </LinearLayout>
+    </ScrollView>
+
 
 </LinearLayout>
