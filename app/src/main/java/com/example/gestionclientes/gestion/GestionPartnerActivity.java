@@ -44,6 +44,12 @@ public class GestionPartnerActivity extends AppCompatActivity implements Seriali
                         Intent intent1=new Intent(getApplicationContext(),MostrarCursoActivity.class);
                         startActivity(intent1);
                         break;
+                    case 2:
+                        Intent intent2=new Intent(getApplicationContext(),MostrarClienteActivity.class);
+                        Usuario usr1=(Usuario)getIntent().getExtras().getSerializable("id");
+                        intent2.putExtra("id",usr1);
+                        startActivity(intent2);
+                        break;
                     case 3:
 
                         alerta.setMessage("Sesion finalizada");

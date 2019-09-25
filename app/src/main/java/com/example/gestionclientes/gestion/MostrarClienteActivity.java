@@ -1,5 +1,6 @@
 package com.example.gestionclientes.gestion;
 
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -48,6 +49,7 @@ public class MostrarClienteActivity extends AppCompatActivity implements Respons
     private void cargarWebService() {
         usr=(Usuario)getIntent().getExtras().getSerializable("id");
         String id_partner=String.valueOf(usr.getId_partner());
+        //String id_partner="1";
         progreso=new MyProgressDialog(this);
         progreso.show();
         String ip=getString(R.string.ip);
@@ -59,31 +61,37 @@ public class MostrarClienteActivity extends AppCompatActivity implements Respons
     @Override
     public void onErrorResponse(VolleyError error) {
         progreso.dismiss();
-        Toast.makeText(getApplicationContext(),"No se pudo conectar "+error,Toast.LENGTH_SHORT).show();
-
+        AlertDialog.Builder mensaje=new AlertDialog.Builder(this);
+        mensaje.setMessage("No tiene clientes por el momento.").show();
 
     }
 
     @Override
     public void onResponse(JSONObject response) {
+        progreso.dismiss();
         Cliente cliente=null;
         try {
-            JSONArray json=response.optJSONArray("cliente");
-            for(int i=0;i<json.length();i++){
-                cliente=new Cliente();
-                JSONObject jsonObject=null;
-                jsonObject=json.getJSONObject(i);
-                cliente.setNombre(jsonObject.optString("nombre"));
-                cliente.setApellido(jsonObject.optString("apellido"));
-                cliente.setFecha(jsonObject.optString("fechaNacimiento"));
-                cliente.setDui(jsonObject.optString("dui"));
-                cliente.setNit(jsonObject.optString("nit"));
-                cliente.setCurso(jsonObject.getString("cursos"));
-                listaCliente.add(cliente);
+            if(response.optJSONArray("cliente")!=null){
+                JSONArray json=response.optJSONArray("cliente");
+                for(int i=0;i<json.length();i++){
+                    cliente=new Cliente();
+                    JSONObject jsonObject=null;
+                    jsonObject=json.getJSONObject(i);
+                    cliente.setNombre(jsonObject.optString("nombre"));
+                    cliente.setApellido(jsonObject.optString("apellido"));
+                    cliente.setFecha(jsonObject.optString("fechaNacimiento"));
+                    cliente.setDui(jsonObject.optString("dui"));
+                    cliente.setNit(jsonObject.optString("nit"));
+                    cliente.setCurso(jsonObject.getString("cursos"));
+                    listaCliente.add(cliente);
+                }
+
+                ClienteAdapter adapter=new ClienteAdapter(listaCliente);
+                recyclerCliente.setAdapter(adapter);
+            }else{
+                Toast.makeText(getApplicationContext(),"No tiene clientes por el momento",
+                        Toast.LENGTH_LONG).show();
             }
-            progreso.dismiss();
-            ClienteAdapter adapter=new ClienteAdapter(listaCliente);
-            recyclerCliente.setAdapter(adapter);
         } catch (JSONException e) {
             e.printStackTrace();
             Toast.makeText(getApplicationContext(),"No se pudo establecer la conexion "+e,Toast.LENGTH_SHORT).show();

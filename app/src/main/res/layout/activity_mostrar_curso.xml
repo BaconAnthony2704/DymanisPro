@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/noadminviewcfp"
     android:orientation="vertical"
     tools:context=".gestion.MostrarCursoActivity">
 
@@ -11,13 +12,16 @@
         android:id="@+id/textView23"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="Mostrar Cursos"
-        android:textSize="18sp" />
+        android:text="Cursos disponibles"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="768dp">
+        android:layout_height="768dp"
+        android:layout_marginTop="20dp">
 
 
         <android.support.v7.widget.RecyclerView
@@ -25,4 +29,5 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </ScrollView>
+
 </LinearLayout>
